@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using DefaultNamespace.SaveSystem;
+using Scripts.SaveSystem;
 using UnityEngine;
 
-namespace DefaultNamespace {
+namespace Scripts {
     
     public class BusinessModel {
 

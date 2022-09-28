@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace DefaultNamespace.SaveSystem {
+namespace Scripts.SaveSystem {
     public class SaveData {
         
         [JsonProperty("SaveDatas")]

@@ -3,7 +3,7 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace DefaultNamespace.SaveSystem {
+namespace Scripts.SaveSystem {
     public class SaveSystem {
 
         static string _path = Application.persistentDataPath + "/saveddata.txt";

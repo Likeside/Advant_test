@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Globalization;
-using DefaultNamespace.SaveSystem;
+using Scripts.SaveSystem;
 using TMPro;
 using UnityEngine;
 
-namespace DefaultNamespace {
+namespace Scripts {
     public class GameController: MonoBehaviour {
         [SerializeField] BusinessesConfig _businessesConfig;
         [SerializeField] Transform _content;

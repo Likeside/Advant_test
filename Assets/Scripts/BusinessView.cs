@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DefaultNamespace {
+namespace Scripts {
     public class BusinessView: MonoBehaviour {
         [SerializeField] TextMeshProUGUI _name;
         [SerializeField] Slider _incomeSlider;
