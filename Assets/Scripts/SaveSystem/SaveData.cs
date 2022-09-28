@@ -6,10 +6,10 @@ namespace DefaultNamespace.SaveSystem {
     public class SaveData {
         
         [JsonProperty("SaveDatas")]
-        public List<BusinessSaveData> SaveDatas { get; }
+        public List<BusinessSaveData> SaveDatas { get; set; }
         
         [JsonProperty("Balance")]
-        public float Balance { get; }
+        public float Balance { get; set; }
 
         public SaveData(List<BusinessModel> businessModels, float balance) {
 
