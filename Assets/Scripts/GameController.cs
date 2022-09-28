@@ -32,12 +32,12 @@ namespace Scripts {
             if (_balance < 0) {
                 _balance = 0;
             }
-            _balanceText.text = _balance.ToString(CultureInfo.InvariantCulture);
+            _balanceText.text = _balance.ToString(CultureInfo.InvariantCulture)  + " $";;
         }
         
         void GetIncome(float income) {
             _balance += income;
-            _balanceText.text = _balance.ToString(CultureInfo.InvariantCulture);
+            _balanceText.text = _balance.ToString(CultureInfo.InvariantCulture)  + " $";;
         }
         
         void CreateBusinesses() {
@@ -63,7 +63,7 @@ namespace Scripts {
             else {
                 _balance = _businessesConfig.defaultBalance;
             }
-            _balanceText.text = _balance.ToString(CultureInfo.InvariantCulture);
+            _balanceText.text = _balance.ToString(CultureInfo.InvariantCulture)  + " $";;
             for (int i = 0; i < _businessesConfig.businesses.Count; i++) {
                 var businessModel = gameLoaded ? new BusinessModel(_businessesConfig.businesses[i], i == 0, saveData.SaveDatas[i]) 
                     : new BusinessModel(_businessesConfig.businesses[i], i == 0);
