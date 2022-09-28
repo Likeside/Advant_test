@@ -29,8 +29,7 @@ namespace Scripts {
                 var imprGo = Instantiate(_improvementPrefab, _improvementsRow);
                 var tmp = imprGo.GetComponentInChildren<TextMeshProUGUI>();
                 tmp.text = improvement.name + "\n" + improvement.cost + " \n" + improvement.incomeAmplifierInPercents;  // TODO: ДОБАВИТЬ ТЕКСТЫ ПЕРЕД ЗНАЧЕНИЯМИ
-
-               _improvementTexts.Add(tmp);
+                _improvementTexts.Add(tmp);
                var btn = imprGo.GetComponent<Button>();
                ImprovementButtons.Add(btn);
             }
@@ -41,7 +40,6 @@ namespace Scripts {
             _lvl.text = currentLvl.ToString();
             _income.text = income.ToString(CultureInfo.InvariantCulture);
             _lvlUpCost.text = lvlUpCost.ToString(CultureInfo.InvariantCulture);
-
             for (int i = 0; i < _improvementTexts.Count; i++) {
                 if (improvementsPurchased[i]) {
                     _improvementTexts[i].text = "Purch"; //убрать хардкод
@@ -52,6 +50,5 @@ namespace Scripts {
         public void UpdateSlider(float incomeProgress) {
             _incomeSlider.value = incomeProgress;
         }
-        
     }
 }

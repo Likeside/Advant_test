@@ -6,9 +6,8 @@ using UnityEngine;
 namespace Scripts {
     
     public class BusinessModel {
-
-        public event Action<float> OnSliderValueChangedEvent;
         public event Action<int, float, float, List<bool>> OnBusinessStatusUpdatedEvent;
+        public event Action<float> OnSliderValueChangedEvent;
         public event Action<float> OnIncomeReceivedEvent;
         public event Action<float> OnMoneySpentEvent;
 
@@ -91,6 +90,7 @@ namespace Scripts {
                  improvementsAmplifier += _business.improvements[i].incomeAmplifierInPercents / 100;
                 }
             }
+            if (_currentLvl == 0) return _business.baseIncome;
             return _currentLvl * _business.baseIncome * improvementsAmplifier;
         }
 

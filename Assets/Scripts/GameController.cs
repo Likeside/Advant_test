@@ -10,12 +10,11 @@ namespace Scripts {
         [SerializeField] Transform _content;
         [SerializeField] GameObject _businessView;
         [SerializeField] TextMeshProUGUI _balanceText;
-
-
+        
         List<BusinessModel> _businessModels;
         List<BusinessView> _businessViews;
-
         float _balance;
+        
         void Start() {
             CreateBusinesses();
             Subscribe(); //  TODO: ОТПИСАТЬСЯ
@@ -39,6 +38,7 @@ namespace Scripts {
             _balance += income;
             _balanceText.text = _balance.ToString(CultureInfo.InvariantCulture);
         }
+        
         void CreateBusinesses() {
             _businessModels = new List<BusinessModel>();
             _businessViews = new List<BusinessView>();
@@ -92,8 +92,7 @@ namespace Scripts {
                 _businessModels[i].UpdateStatus();
             }
         }
-
-
+        
         void Unsubscribe() {
             for (int i = 0; i < _businessModels.Count; i++) {
                 _businessModels[i].OnBusinessStatusUpdatedEvent -= _businessViews[i].UpdateBusiness;
