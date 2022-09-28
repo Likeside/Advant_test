@@ -28,7 +28,8 @@ namespace Scripts {
                 var improvement = business.improvements[i];
                 var imprGo = Instantiate(_improvementPrefab, _improvementsRow);
                 var tmp = imprGo.GetComponentInChildren<TextMeshProUGUI>();
-                tmp.text = improvement.name + "\n" + improvement.cost + " \n" + improvement.incomeAmplifierInPercents;  // TODO: ДОБАВИТЬ ТЕКСТЫ ПЕРЕД ЗНАЧЕНИЯМИ
+                //захардкожено, т.к. вне тестового текст грузился бы из JSON (или другого текстового файла)
+                tmp.text = $"{improvement.name}\nДоход: {improvement.incomeAmplifierInPercents}%\nЦена: {improvement.cost}"; 
                 _improvementTexts.Add(tmp);
                var btn = imprGo.GetComponent<Button>();
                ImprovementButtons.Add(btn);
@@ -36,13 +37,12 @@ namespace Scripts {
         }
 
         public void UpdateBusiness(int currentLvl, float income, float lvlUpCost, List<bool> improvementsPurchased) {
-            // TODO: ДОБАВИТЬ ТЕКСТЫ ПЕРЕД ЗНАЧЕНИЯМИ
             _lvl.text = currentLvl.ToString();
-            _income.text = income.ToString(CultureInfo.InvariantCulture);
-            _lvlUpCost.text = lvlUpCost.ToString(CultureInfo.InvariantCulture);
+            _income.text = income.ToString(CultureInfo.InvariantCulture) + " $";
+            _lvlUpCost.text = lvlUpCost.ToString(CultureInfo.InvariantCulture)  + " $";
             for (int i = 0; i < _improvementTexts.Count; i++) {
                 if (improvementsPurchased[i]) {
-                    _improvementTexts[i].text = "Purch"; //убрать хардкод
+                    _improvementTexts[i].text = "Куплено"; 
                 }
             }
         }

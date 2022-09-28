@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Scripts.SaveSystem;
@@ -107,6 +108,14 @@ namespace Scripts {
                 }
                 _businessModels[i].OnMoneySpentEvent -= SpendMoney;
             }
+        }
+
+        void OnApplicationFocus(bool hasFocus) {
+            if(!hasFocus) SaveSystem.SaveSystem.Save(_businessModels, _balance);
+        }
+
+        void OnApplicationQuit() {
+            Unsubscribe();
         }
     }
 }
