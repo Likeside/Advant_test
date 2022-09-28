@@ -18,13 +18,12 @@ namespace Scripts {
         
         void Start() {
             CreateBusinesses();
-            Subscribe(); //  TODO: ОТПИСАТЬСЯ
+            Subscribe(); 
         }
         void Update() {
             foreach (var model in _businessModels) {
                 model.UpdateSlider();
             }
-            SaveSystem.SaveSystem.Save(_businessModels, _balance);
         }
         
         void SpendMoney(float cost) {
@@ -115,7 +114,8 @@ namespace Scripts {
         }
 
         void OnApplicationQuit() {
-            Unsubscribe();
+            SaveSystem.SaveSystem.Save(_businessModels, _balance);
+            Unsubscribe(); 
         }
     }
 }
