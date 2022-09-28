@@ -29,7 +29,7 @@ namespace Scripts {
                 var imprGo = Instantiate(_improvementPrefab, _improvementsRow);
                 var tmp = imprGo.GetComponentInChildren<TextMeshProUGUI>();
                 //захардкожено, т.к. вне тестового текст грузился бы из JSON (или другого текстового файла)
-                tmp.text = $"{improvement.name}\nДоход: {improvement.incomeAmplifierInPercents}%\nЦена: {improvement.cost}"; 
+                tmp.text = $"{improvement.name}\nДоход: +{improvement.incomeAmplifierInPercents}%\nЦена: {improvement.cost}"; 
                 _improvementTexts.Add(tmp);
                var btn = imprGo.GetComponent<Button>();
                ImprovementButtons.Add(btn);
