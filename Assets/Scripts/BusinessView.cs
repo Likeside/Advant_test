@@ -12,20 +12,28 @@ namespace DefaultNamespace {
         [SerializeField] TextMeshProUGUI _lvl;
         [SerializeField] TextMeshProUGUI _income;
         [SerializeField] TextMeshProUGUI _lvlUpCost;
-
+        [SerializeField] Button _levelUpBtn;
         [SerializeField] Transform _improvementsRow;
         [SerializeField] GameObject _improvementPrefab;
+        
+        public Button LevelUpButton => _levelUpBtn;
+        public List<Button> ImprovementButtons { get; private set; }
 
         List<TextMeshProUGUI> _improvementTexts;
         
         public void SetBusiness(BusinessesConfig.Business business) {
             _name.text = business.name;
             _improvementTexts = new List<TextMeshProUGUI>();
-            foreach (var improvement in business.improvements) {
+            ImprovementButtons = new List<Button>();
+            for (int i = 0; i < business.improvements.Count; i++) {
+                var improvement = business.improvements[i];
                 var imprGo = Instantiate(_improvementPrefab, _improvementsRow);
                 var tmp = imprGo.GetComponentInChildren<TextMeshProUGUI>();
-                tmp.text = improvement.cost + " \n" + improvement.incomeAmlifierInPercents;
+                tmp.text = improvement.name + "\n" + improvement.cost + " \n" + improvement.incomeAmplifierInPercents;  // TODO: ДОБАВИТЬ ТЕКСТЫ ПЕРЕД ЗНАЧЕНИЯМИ
+
                _improvementTexts.Add(tmp);
+               var btn = imprGo.GetComponent<Button>();
+               ImprovementButtons.Add(btn);
             }
         }
 

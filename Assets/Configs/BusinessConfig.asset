@@ -12,23 +12,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0c9a611fde1b4c5b904ef09be70c05, type: 3}
   m_Name: BusinessConfig
   m_EditorClassIdentifier: 
-  defaultBalance: 0
+  defaultBalance: 150
   businesses:
-  - name: First Business
+  - name: "\u0411\u0438\u0437\u043D\u0435\u0441 1"
     incomeDelay: 3
-    baseCost: 4
-    baseIncome: 5
+    baseCost: 3
+    baseIncome: 3
     improvements:
-    - cost: 10
-      incomeAmlifierInPercents: 5
-    - cost: 1
-      incomeAmlifierInPercents: 90
-  - name: Second Business
-    incomeDelay: 32
-    baseCost: 44
-    baseIncome: 566
+    - name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 1"
+      cost: 50
+      incomeAmplifierInPercents: 50
+    - name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 2"
+      cost: 400
+      incomeAmplifierInPercents: 100
+  - name: "\u0411\u0438\u0437\u043D\u0435\u0441 2"
+    incomeDelay: 6
+    baseCost: 40
+    baseIncome: 40
     improvements:
-    - cost: 1035
-      incomeAmlifierInPercents: 345
-    - cost: 35
-      incomeAmlifierInPercents: 35346
+    - name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 1"
+      cost: 1200
+      incomeAmplifierInPercents: 100
+    - name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 2"
+      cost: 4000
+      incomeAmplifierInPercents: 200
+  - name: "\u0411\u0438\u0437\u043D\u0435\u0441 3"
+    incomeDelay: 10
+    baseCost: 200
+    baseIncome: 200
+    improvements:
+    - name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 1"
+      cost: 6000
+      incomeAmplifierInPercents: 100
+    - name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 2"
+      cost: 20000
+      incomeAmplifierInPercents: 150
+  - name: "\u0411\u0438\u0437\u043D\u0435\u0441 4"
+    incomeDelay: 17
+    baseCost: 1000
+    baseIncome: 1000
+    improvements:
+    - name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 1"
+      cost: 15000
+      incomeAmplifierInPercents: 100
+    - name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 2"
+      cost: 50000
+      incomeAmplifierInPercents: 200
+  - name: "\u0411\u0438\u0437\u043D\u0435\u0441 5"
+    incomeDelay: 30
+    baseCost: 5000
+    baseIncome: 5000
+    improvements:
+    - name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 1"
+      cost: 100000
+      incomeAmplifierInPercents: 200
+    - name: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 2"
+      cost: 500000
+      incomeAmplifierInPercents: 400

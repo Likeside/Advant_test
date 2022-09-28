@@ -22,7 +22,8 @@ public class BusinessesConfig : ScriptableObject {
     
     [Serializable]
     public class Improvement {
+        public string name;
         public float cost;
-        public float incomeAmlifierInPercents;
+        public float incomeAmplifierInPercents;
     }
 }

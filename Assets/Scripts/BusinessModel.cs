@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DefaultNamespace.SaveSystem;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace DefaultNamespace {
@@ -9,19 +8,19 @@ namespace DefaultNamespace {
     public class BusinessModel {
 
         public event Action<float> OnSliderValueChangedEvent;
-        public event Action<int, float, float, List<bool>> OnBusinessStatusUpdated;
+        public event Action<int, float, float, List<bool>> OnBusinessStatusUpdatedEvent;
         public event Action<float> OnIncomeReceivedEvent;
+        public event Action<float> OnMoneySpentEvent;
 
-        BusinessesConfig.Business _business;
         public string Name => _business.name;
         public int CurrentLvl => _currentLvl;
         public float CurrentIncomeProgress => _currentIncomeProgress;
-        
         public List<bool> ImprovementsPurchased => _improvementsPurchased;
 
         int _currentLvl;
         float _currentIncomeProgress;
-        List<bool> _improvementsPurchased;
+        readonly BusinessesConfig.Business _business;
+        readonly List<bool> _improvementsPurchased;
 
         public BusinessModel(BusinessesConfig.Business business, bool isDefaultBusiness = false, SaveData.BusinessSaveData saveData = null) {
             _business = business;
@@ -34,32 +33,46 @@ namespace DefaultNamespace {
                 _currentLvl = isDefaultBusiness ? 1 : 0;
                 _currentIncomeProgress = 0;
                 _improvementsPurchased = new List<bool>();
-                foreach (var improvement in _business.improvements) {
+                for (int i = 0; i < _business.improvements.Count; i++) {
                     _improvementsPurchased.Add(false);
                 }
             }
-            
-        }
-        
-        public bool LevelUp(float currentBalance) {
-            if (GetLevelUpCost() <= currentBalance) {
-                _currentLvl++;
-                OnBusinessStatusUpdated?.Invoke(_currentLvl, GetIncome(), GetLevelUpCost(), ImprovementsPurchased );
-                return true;
-            }
-            return false;
         }
 
-        public bool PurchaseImprovement(int index) {
-            if (index >= 0 && index < ImprovementsPurchased.Count) {
-                ImprovementsPurchased[index] = true;
-                OnBusinessStatusUpdated?.Invoke(_currentLvl, GetIncome(), GetLevelUpCost(), ImprovementsPurchased );
-                return true;
+        public void UpdateStatus() {
+            OnBusinessStatusUpdatedEvent?.Invoke(_currentLvl, GetIncome(), GetLevelUpCost(), ImprovementsPurchased );
+        }
+
+        public void SetSliderToZero() {
+            OnSliderValueChangedEvent?.Invoke(0f);
+        }
+        
+        public void LevelUp(float currentBalance) {
+            if (GetLevelUpCost() <= currentBalance) {
+                _currentLvl++;
+                OnBusinessStatusUpdatedEvent?.Invoke(_currentLvl, GetIncome(), GetLevelUpCost(), ImprovementsPurchased );
+                OnMoneySpentEvent?.Invoke(GetLevelUpCost());
             }
-            return false;
+            else {
+             OnMoneySpentEvent?.Invoke(0);   
+            }
+        }
+
+        public void PurchaseImprovement(int index, float currentBalance) {
+            float cost = 0;
+            if (currentBalance >= _business.improvements[index].cost && _currentLvl > 0) {
+                if (index >= 0 && index < ImprovementsPurchased.Count) {
+                    ImprovementsPurchased[index] = true;
+                    OnBusinessStatusUpdatedEvent?.Invoke(_currentLvl, GetIncome(), GetLevelUpCost(),
+                        ImprovementsPurchased);
+                    cost = _business.improvements[index].cost;
+                }
+            }
+            OnMoneySpentEvent?.Invoke(cost);
         }
         
         public void UpdateSlider() {
+            if(_currentLvl <= 0) return;
             if (_currentIncomeProgress >= 1f) {
                 _currentIncomeProgress = 0f;
                 OnIncomeReceivedEvent?.Invoke(GetIncome());
@@ -73,8 +86,10 @@ namespace DefaultNamespace {
 
         float GetIncome() {
             float improvementsAmplifier = 1;
-            foreach (var improvement in _business.improvements) {
-                improvementsAmplifier += improvement.incomeAmlifierInPercents / 100;
+            for (int i = 0; i < _improvementsPurchased.Count; i++) {
+                if (_improvementsPurchased[i]) {
+                 improvementsAmplifier += _business.improvements[i].incomeAmplifierInPercents / 100;
+                }
             }
             return _currentLvl * _business.baseIncome * improvementsAmplifier;
         }
